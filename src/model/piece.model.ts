@@ -4,19 +4,16 @@ import { Board } from "./board.model"
 export class Piece {
   type: pieceType
   color: Color
-  x: xCoordinate
-  y: yCoordinate
+  x: number
+  y: number
 
-  constructor(color: Color, x:xCoordinate, y: yCoordinate, type:pieceType) {
+  constructor(color: Color, x:number, y: number, type:pieceType) {
     this.color = color
     this.x = x
     this.y = y
     this.type = type
   }
 
-  coordinateToNumber() {
-    return [this.x.charCodeAt(0) - 97, -1 + this.y]
-  }
 
   //abstract possibleMoves(board: Board): Coordinate[];
 }

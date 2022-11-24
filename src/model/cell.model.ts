@@ -4,13 +4,9 @@ import { Piece } from "./piece.model";
 export class Cell {
   piece: Piece | undefined
   color: Color
-  x: xCoordinate
-  y: yCoordinate
 
-  constructor (color: Color, x:xCoordinate, y: yCoordinate, piece?: Piece) {
+  constructor (color: Color,  piece?: Piece) {
     this.piece = piece
     this.color = color
-    this.x = x
-    this.y = y
   }
 }

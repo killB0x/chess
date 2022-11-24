@@ -13,7 +13,7 @@ export class CellComponent implements OnInit {
   @Input() color:Color = "white"
   @Input() cell:Cell | undefined
   @Output() onShowPotentialMoves = new EventEmitter<Cell>()
-  piece:Piece | undefined
+  @Output() onMovePiece = new EventEmitter<Cell>()
   focused = false
 
   colors = new Map<Color, string>([
@@ -33,23 +33,43 @@ export class CellComponent implements OnInit {
   }
 
   getImageUrl() {
-    if (this.piece) {
-      return `../../../assets/images/${this.piece.color}_${this.piece.type}.svg`
+    if (this.cell?.piece) {
+      return `../../../assets/images/${this.cell.piece.color}_${this.cell.piece.type}.svg`
     }
     return ""
   }
 
   onClick(element: any) {
+    const movePiece = this.cell?.potentialOption
     this.eventService.fireClearEvent()
-    if (this.piece) {
+    console.log("CLICK")
+    if (movePiece) {
+      console.log("Before", this.cell)
+      this.onMovePiece.emit(this.cell)
+      console.log("After", this.cell)
+      console.log("img",this.getImageUrl())
+    } else if (this.cell?.piece) {
       this.focused = true
       this.onShowPotentialMoves.emit(this.cell)
+    }
+
+  }
+
+  onHoverEnter(e:any) {
+    if (this.cell?.potentialOption) {
+      this.focused = true
+    }
+  }
+
+  onHoverLeave(e:any) {
+    if (this.cell?.potentialOption) {
+      this.focused = false
     }
   }
 
   ngOnInit(): void {
     if (this.cell) {
-      this.piece = this.cell.piece
+      this.cell.piece = this.cell.piece
     }
   }
 

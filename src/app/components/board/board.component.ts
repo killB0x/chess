@@ -11,11 +11,21 @@ import { Game } from 'src/model/game.model';
 })
 export class BoardComponent implements OnInit {
   game: Game = new Game("white")
+  lastActiveCell: Cell | undefined
 
   constructor() { }
 
   showPotentialMoves(cell:Cell) {
+    this.lastActiveCell = cell
     this.game.board.updateCellPotentialMove(cell)
+  }
+
+  movePiece(cell:Cell) {
+    console.log("MOVEW?", cell)
+    if (this.lastActiveCell) {
+      console.log("MOVE")
+      this.game.movePiece(this.lastActiveCell.piece!, cell.x, cell.y)
+    }
   }
 
   ngOnInit(): void {

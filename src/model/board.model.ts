@@ -18,7 +18,9 @@ export class Board {
       let currentRow: Cell[] = []
       for (let j = 1; j <= 8; j++) {
         currentRow.push(new Cell(
-          currentColor as Color))
+          currentColor as Color,
+          j-1,
+          i-1))
         if (j == this.BOARD_SIZE) {
           continue
         }
@@ -40,7 +42,7 @@ export class Board {
       ["empty" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
       ["empty" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
       ["empty" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
-      ["empty" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
+      ["queen" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
       ["pawn"  ,"pawn"   ,"pawn"   ,"pawn"  ,"pawn"  ,"pawn"   ,"pawn"   ,"pawn" ],
       ["rook"  ,"knight" ,"bishop" ,"queen" ,"king"  ,"bishop" ,"knight" ,"rook" ],
     ]

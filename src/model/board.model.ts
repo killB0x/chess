@@ -1,6 +1,12 @@
 import { Color, pieceType, xCoordinate, yCoordinate } from "src/app/types/types";
 import { Cell } from "./cell.model";
-import { Piece } from "./piece.model";
+import { Bishop } from "./pieces/bishop.piece.model";
+import { King } from "./pieces/king.piece.model";
+import { Knight } from "./pieces/knight.piece.model";
+import { Pawn } from "./pieces/pawn.piece.model";
+import { Piece } from "./pieces/piece.model";
+import { Queen } from "./pieces/queen.piece.model";
+import { Rook } from "./pieces/rook.piece.model";
 
 export class Board {
   BOARD_SIZE = 8
@@ -49,15 +55,32 @@ export class Board {
     for (let i = 0; i < this.BOARD_SIZE; i++) {
       for (let j = 0; j < this.BOARD_SIZE; j++) {
         if (board_layout[i][j] != "empty") {
-          this.board[i][j].piece = new Piece(
-            pieceColor,
+          this.board[i][j].piece = this.getPieceByType(
             j,
             i,
+            pieceColor,
             board_layout[i][j] as pieceType)
         } else {
           pieceColor = playerColor
         }
       }
+    }
+  }
+
+  getPieceByType(x: number, y:number, pieceColor: Color, type: pieceType,) {
+    switch(type) {
+      case "pawn":
+        return new Pawn(pieceColor, x, y, type)
+      case "bishop":
+        return new Bishop(pieceColor, x, y, type)
+      case "rook":
+        return new Rook(pieceColor, x, y, type)
+      case "king":
+        return new King(pieceColor, x, y, type)
+      case "knight":
+        return new Knight(pieceColor, x, y, type)
+      case "queen":
+        return new Queen(pieceColor, x, y, type)
     }
   }
 

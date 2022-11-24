@@ -1,5 +1,5 @@
 import { Color, pieceType, xCoordinate, yCoordinate } from "src/app/types/types";
-import { Piece } from "./piece.model";
+import { Piece } from "./pieces/piece.model";
 
 export class Cell {
   piece: Piece | undefined

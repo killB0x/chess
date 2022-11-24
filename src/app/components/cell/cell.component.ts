@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Color } from 'src/app/types/types';
-import { Piece } from 'src/model/piece.model';
+import { Piece } from 'src/model/pieces/piece.model';
 
 @Component({
   selector: 'app-cell',
@@ -25,8 +25,12 @@ export class CellComponent implements OnInit {
 
   constructor() { }
 
+  onClick() {
+
+  }
+
   ngOnInit(): void {
-    console.log(this.piece)
+
   }
 
 }

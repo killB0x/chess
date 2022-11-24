@@ -27,6 +27,9 @@ export function avoidsSameColorCollision(x:number, y:number,board:Board, piece: 
 }
 
 export function oppositeColorCollision(x:number, y:number, board:Board, piece: Piece) {
+  if (!insideBoard(x,y)) {
+    return false
+  }
   const collidedPiece = board.getCells()[y][x].piece
   if (collidedPiece && collidedPiece.color !== piece.color) {
     return true

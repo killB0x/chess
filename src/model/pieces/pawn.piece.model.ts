@@ -9,21 +9,26 @@ export class Pawn extends Piece {
   }
 
   possibleMoves(board: Board): Coordinate[] {
+    let yOffset = -1
+    if (this.color == "black") {
+      yOffset = 1
+    }
     let allMoves:Coordinate[] = []
-    if (!board.getCells()[this.y-1][this.x].piece) {
-      allMoves = [{x:this.x, y: this.y-1}]
+    if (!board.getCells()[this.y + yOffset][this.x].piece) {
+      allMoves = [{x:this.x, y: this.y + yOffset}]
     }
-    if (oppositeColorCollision(this.x-1,this.y-1,board,this)) {
-      allMoves.push({x:this.x-1, y:this.y-1})
+    if (oppositeColorCollision(this.x-1,this.y + yOffset,board,this)) {
+      allMoves.push({x:this.x-1, y:this.y + yOffset})
     }
-    if (oppositeColorCollision(this.x+1,this.y-1,board,this)) {
-      allMoves.push({x:this.x+1, y:this.y-1})
+    if (oppositeColorCollision(this.x+1,this.y + yOffset,board,this)) {
+      allMoves.push({x:this.x+1, y:this.y + yOffset})
     }
     allMoves = allMoves.filter(val => insideBoard(val.x,val.y) && avoidsSameColorCollision(val.x,val.y,board,this))
-    if (this.y < 6 || !allMoves) {
+    console.log(this.x, this.y, yOffset)
+    if ((yOffset < 0 && this.y < 6) || (yOffset > 0 && this.y > 1) || !allMoves) {
       return allMoves
     }
-    allMoves.push({x:this.x, y: this.y-2})
+    allMoves.push({x:this.x, y: this.y + 2*yOffset})
     allMoves = allMoves.filter(val => insideBoard(val.x,val.y) && avoidsSameColorCollision(val.x,val.y,board,this))
 
 

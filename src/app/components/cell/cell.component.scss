@@ -1,4 +1,11 @@
 .cell {
   width: 4rem;
   height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.piece {
+  width: 100%;
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <app-cell *ngFor="let cell of board.getCells()" [color] = "cell.color">
+  <app-cell *ngFor="let cell of game.board.getCells()" [color] = "cell.color" [piece]="cell.piece">
   </app-cell>
 </div>
 

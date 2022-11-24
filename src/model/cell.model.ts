@@ -1,14 +1,14 @@
-import { cellType, Color, xCoordinate, yCoordinate } from "src/app/types/types";
+import { Color, pieceType, xCoordinate, yCoordinate } from "src/app/types/types";
+import { Piece } from "./piece.model";
 
 export class Cell {
-  type: cellType
+  piece: Piece | undefined
   color: Color
   x: xCoordinate
   y: yCoordinate
 
-
-  constructor (color: Color, x:xCoordinate, y: yCoordinate, type?:cellType) {
-    this.type = type ?? "empty"
+  constructor (color: Color, x:xCoordinate, y: yCoordinate, piece?: Piece) {
+    this.piece = piece
     this.color = color
     this.x = x
     this.y = y

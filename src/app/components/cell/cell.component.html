@@ -1,3 +1,3 @@
 <div class="cell" [ngStyle]="{'background-color': this.colors.get(this.color)}">
-
+  <img class="piece" *ngIf = "this.piece" src= {{this.getImageUrl()}}>
 </div>

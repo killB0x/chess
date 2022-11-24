@@ -1,3 +1,6 @@
-<div class="cell" [ngStyle]="{'background-color': this.colors.get(this.color)}">
+<div class="cell"
+    [ngStyle]="{'background-color': focused? this.colors.get('focused') :this.colors.get(this.color)}"
+    (click) = "onClick($event)">
   <img class="piece" *ngIf = "this.piece" src= {{this.getImageUrl()}}>
+  <span *ngIf = "this.cell!.potentialOption && !this.piece" class="dot"></span>
 </div>

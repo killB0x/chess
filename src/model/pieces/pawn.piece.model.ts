@@ -8,7 +8,14 @@ export class Pawn extends Piece {
   }
 
   possibleMoves(board: Board): Coordinate[] {
-    return [{x:0,y:0}]
+    let allMoves = [{x:this.x, y: this.y-1}]
+    allMoves = allMoves.filter(val => this.insideBoard(val.x,val.y))
+    if (this.y < 6) {
+      return allMoves
+    }
+    allMoves.push({x:this.x, y: this.y-2})
+    allMoves = allMoves.filter(val => this.insideBoard(val.x,val.y))
+    return allMoves
   }
 
 }

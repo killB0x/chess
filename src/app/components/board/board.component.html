@@ -1,5 +1,5 @@
 <div class="container">
-  <app-cell *ngFor="let cell of game.board.getCells().flat()" [color] = "cell.color" [piece]="cell.piece">
+  <app-cell *ngFor="let cell of game.board.getCells().flat()" [color] = "cell.color" [cell]="cell" (onShowPotentialMoves)="showPotentialMoves($event)">
   </app-cell>
 </div>
 

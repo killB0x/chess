@@ -33,7 +33,7 @@ export class Board {
   }
 
   public initializeBoard(playerColor: Color) {
-    //display entire board for readability
+    //display entire board for readability and easier testing
     const board_layout = [
       ["rook"  ,"knight" ,"bishop" ,"queen" ,"king"  ,"bishop" ,"knight" ,"rook" ],
       ["pawn"  ,"pawn"   ,"pawn"   ,"pawn"  ,"pawn"  ,"pawn"   ,"pawn"   ,"pawn" ],
@@ -82,6 +82,17 @@ export class Board {
       case "queen":
         return new Queen(pieceColor, x, y, type)
     }
+  }
+
+  updateCellPotentialMove(cell:Cell) {
+    if (cell.piece) {
+      const cellPositions = cell.piece.possibleMoves(this)
+      cellPositions.forEach(e => {
+        console.log(this.board, e)
+        this.board[e.y][e.x].potentialOption = true
+      });
+    }
+
   }
 
   getCells() {

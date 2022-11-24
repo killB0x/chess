@@ -19,7 +19,7 @@ export class Knight extends Piece {
       {x: this.x-1, y: this.y-2},
     ]
 
-    allMoves.filter(val => this.insideBoard(val.x,val.y))
+    allMoves = allMoves.filter(val => this.insideBoard(val.x,val.y))
 
     return allMoves
   }

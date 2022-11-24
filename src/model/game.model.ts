@@ -7,7 +7,6 @@ export class Game {
   constructor (playerColor: Color) {
     this.board = new Board()
     this.board.initializeBoard(playerColor)
-    console.log(this.board)
   }
 
 

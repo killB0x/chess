@@ -9,7 +9,20 @@ export class King extends Piece {
   }
 
   possibleMoves(board: Board): Coordinate[] {
-    return [{x:0,y:0}]
+    let allMoves = [
+      {x:this.x+1, y:this.y+1},
+      {x:this.x-1, y:this.y+1},
+      {x:this.x+1, y:this.y-1},
+      {x:this.x-1, y:this.y-1},
+      {x:this.x+1, y:this.y},
+      {x:this.x-1, y:this.y},
+      {x:this.x, y:this.y-1},
+      {x:this.x, y:this.y+1}
+    ]
+
+    allMoves = allMoves.filter(val => this.insideBoard(val.x,val.y))
+
+    return allMoves
   }
 
 }

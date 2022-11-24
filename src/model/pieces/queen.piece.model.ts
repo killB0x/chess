@@ -1,4 +1,5 @@
 import { Color, Coordinate, pieceType } from "src/app/types/types";
+import { generateDirectionalMoves } from "src/utils/utils";
 import { Board } from "../board.model";
 import { Piece } from "./piece.model";
 
@@ -8,7 +9,16 @@ export class Queen extends Piece {
   }
 
   possibleMoves(board: Board): Coordinate[] {
-    return [{x:0,y:0}]
+    let allMoves:Coordinate[] = []
+    allMoves = allMoves.concat(generateDirectionalMoves(1,0,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(-1,0,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(0,1,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(0,-1,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(1,1,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(-1,-1,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(-1,1,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(1,-1,this))
+    return allMoves
   }
 
 }

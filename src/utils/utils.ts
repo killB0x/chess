@@ -7,6 +7,9 @@ export function generateDirectionalMoves(xOffset:number, yOffset:number,piece:Pi
     let currentMove = {x:piece.x+xOffset,y: piece.y+yOffset}
     while (insideBoard(currentMove.x,currentMove.y) && avoidsSameColorCollision(currentMove.x,currentMove.y,board,piece)) {
       result.push(currentMove)
+      if (oppositeColorCollision(currentMove.x, currentMove.y, board, piece)) {
+        break
+      }
       currentMove = {x:currentMove.x+xOffset,y: currentMove.y+yOffset}
     }
     return result
@@ -21,4 +24,12 @@ export function avoidsSameColorCollision(x:number, y:number,board:Board, piece: 
     return false
   }
   return true;
+}
+
+export function oppositeColorCollision(x:number, y:number, board:Board, piece: Piece) {
+  const collidedPiece = board.getCells()[y][x].piece
+  if (collidedPiece && collidedPiece.color !== piece.color) {
+    return true
+  }
+  return false
 }

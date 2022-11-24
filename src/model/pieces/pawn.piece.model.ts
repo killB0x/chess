@@ -1,5 +1,5 @@
 import { Color, Coordinate, pieceType } from "src/app/types/types";
-import { insideBoard, avoidsSameColorCollision } from "src/utils/utils";
+import { insideBoard, avoidsSameColorCollision, oppositeColorCollision } from "src/utils/utils";
 import { Board } from "../board.model";
 import { Piece } from "./piece.model";
 
@@ -9,7 +9,16 @@ export class Pawn extends Piece {
   }
 
   possibleMoves(board: Board): Coordinate[] {
-    let allMoves = [{x:this.x, y: this.y-1}]
+    let allMoves:Coordinate[] = []
+    if (!board.getCells()[this.y-1][this.x].piece) {
+      allMoves = [{x:this.x, y: this.y-1}]
+    }
+    if (oppositeColorCollision(this.x-1,this.y-1,board,this)) {
+      allMoves.push({x:this.x-1, y:this.y-1})
+    }
+    if (oppositeColorCollision(this.x+1,this.y-1,board,this)) {
+      allMoves.push({x:this.x+1, y:this.y-1})
+    }
     allMoves = allMoves.filter(val => insideBoard(val.x,val.y) && avoidsSameColorCollision(val.x,val.y,board,this))
     if (this.y < 6 || !allMoves) {
       return allMoves
@@ -17,7 +26,6 @@ export class Pawn extends Piece {
     allMoves.push({x:this.x, y: this.y-2})
     allMoves = allMoves.filter(val => insideBoard(val.x,val.y) && avoidsSameColorCollision(val.x,val.y,board,this))
 
-    console.log(allMoves.length)
 
     return allMoves
   }

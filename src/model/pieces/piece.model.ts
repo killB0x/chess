@@ -14,9 +14,7 @@ export abstract class Piece {
     this.type = type
   }
 
-  insideBoard(x:number, y:number) {
-    return x < 8 && x >=0 && y < 8 && y >=0
-  }
+
 
   abstract possibleMoves(board: Board): Coordinate[];
 }

@@ -11,10 +11,12 @@ export class Bishop extends Piece {
 
   possibleMoves(board: Board): Coordinate[] {
     let allMoves:Coordinate[] = []
-    allMoves = allMoves.concat(generateDirectionalMoves(1,1,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(-1,-1,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(1,-1,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(-1,1,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(1,1,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(-1,-1,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(1,-1,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(-1,1,this, board))
+
+    console.log(allMoves.length)
     //no need for inside board check
     return allMoves
   }

@@ -10,14 +10,16 @@ export class Queen extends Piece {
 
   possibleMoves(board: Board): Coordinate[] {
     let allMoves:Coordinate[] = []
-    allMoves = allMoves.concat(generateDirectionalMoves(1,0,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(-1,0,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(0,1,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(0,-1,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(1,1,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(-1,-1,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(-1,1,this))
-    allMoves = allMoves.concat(generateDirectionalMoves(1,-1,this))
+    allMoves = allMoves.concat(generateDirectionalMoves(1,0,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(-1,0,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(0,1,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(0,-1,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(1,1,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(-1,-1,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(-1,1,this, board))
+    allMoves = allMoves.concat(generateDirectionalMoves(1,-1,this, board))
+
+    console.log(allMoves.length)
     return allMoves
   }
 

@@ -20,7 +20,6 @@ export class Pawn extends Piece {
     }
     let allMoves:Coordinate[] = []
 
-    console.log(this.y, yOffset)
     if (!board.getCells()[this.y + yOffset][this.x].piece) {
       allMoves = [{x:this.x, y: this.y + yOffset}]
     }

@@ -39,7 +39,6 @@ export function oppositeColorCollision(x:number, y:number, board:Board, piece: P
 }
 
 export function checkMovesAgainstCheck(board:Board, piece: Piece, moves: Coordinate[]) {
-  console.log("moves", moves, piece)
   let result:Coordinate[] = []
   for (const move of moves) {
     const boardCopy = board.deepCopy()
@@ -49,7 +48,6 @@ export function checkMovesAgainstCheck(board:Board, piece: Piece, moves: Coordin
       pieceCopy!.x = move.x
       pieceCopy!.y = move.y
       boardCopy.getCells()[move.y][move.x].piece = pieceCopy
-      console.log("Copy",boardCopy)
     }
     if (!checkCheck(boardCopy, piece.color)) {
       result.push(move)

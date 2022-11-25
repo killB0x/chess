@@ -15,22 +15,29 @@ export class CellComponent implements OnInit {
   @Output() onShowPotentialMoves = new EventEmitter<Cell>()
   @Output() onMovePiece = new EventEmitter<Cell>()
   focused = false
-  checked = true
+  checked = false
 
   colors = new Map<Color, string>([
     ["white", "#f0d9b5"],
     ["black", "#b58863"],
-    ["focused", "#646d40"],
-    ["checked", "#e81915"]
+    ["focused", "#646d40"]
   ])
 
   constructor(private eventService: EventsService) {
     this.eventService.clearEventObservable.subscribe(() => {
       this.focused = false
+      this.checked = false
       if (this.cell) {
         this.cell.potentialOption = false
       }
-
+    })
+    this.eventService.removeCheckObservable.subscribe(() => {
+      this.checked = false
+    })
+    this.eventService.setCheckObservable.subscribe((king) => {
+      if (this.cell && this.cell.piece && this.cell.piece == king) {
+        this.checked = true
+      }
     })
   }
 
@@ -69,6 +76,7 @@ export class CellComponent implements OnInit {
     if (this.cell) {
       this.cell.piece = this.cell.piece
     }
+
   }
 
 }

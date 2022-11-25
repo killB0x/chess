@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EventsService } from 'src/app/services/events.service';
 import { Cell } from 'src/model/cell.model';
 import { Game } from 'src/model/game.model';
@@ -11,8 +11,10 @@ import { checkCheck } from 'src/utils/utils';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
+  @Output() restart= new EventEmitter()
   game: Game = new Game("white")
   lastActiveCell: Cell | undefined
+
 
   constructor(private eventService: EventsService) { }
 
@@ -32,6 +34,9 @@ export class BoardComponent implements OnInit {
 
   }
 
+  restartGame() {
+    this.restart.emit()
+  }
 
   ngOnInit(): void {
   }

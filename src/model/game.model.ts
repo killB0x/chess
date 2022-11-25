@@ -12,6 +12,7 @@ export class Game {
   computerColor: Color = "black"
   turn: Color = "white"
   ended: boolean = false
+  winner: string | undefined
 
   constructor (playerColor: Color) {
     this.board = new Board()
@@ -45,6 +46,11 @@ export class Game {
     this.endTurn()
     if (this.gameOver(this.turn)) {
       this.ended = true
+      if (piece.color == this.computerColor) {
+        this.winner = "Computer"
+      } else {
+        this.winner = "You"
+      }
       return
     }
     if (piece.color != this.computerColor) {
@@ -57,7 +63,6 @@ export class Game {
       const moves = this.board.getPotentialMovesByColor(this.computerColor)
       const piece = moves[ Math.floor(Math.random() * moves.length)]
       const move = piece.moves[Math.floor(Math.random() * piece.moves.length)]
-      console.log("Computer move")
       this.movePiece(piece.piece, move.x, move.y)
     }, 1000)
   }

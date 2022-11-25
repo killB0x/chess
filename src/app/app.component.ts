@@ -12,4 +12,8 @@ export class AppComponent {
   startGame() {
     this.gameStarted = true
   }
+
+  restartGame() {
+    this.gameStarted = false
+  }
 }

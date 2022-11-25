@@ -7,13 +7,15 @@ import { CellComponent } from './components/cell/cell.component';
 import { MainScreenComponent } from './components/main-screen/main-screen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import { GameOverComponent } from './components/game-over/game-over.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     CellComponent,
-    MainScreenComponent
+    MainScreenComponent,
+    GameOverComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
 <div class="container">
-  <app-board *ngIf="gameStarted"></app-board>
+  <app-board *ngIf="gameStarted" (restart)="restartGame()"></app-board>
   <app-main-screen *ngIf="!gameStarted" (startGame)="startGame()"></app-main-screen>
 </div>

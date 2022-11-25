@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!game.ended">
   <app-cell *ngFor="let cell of game.board.getCells().flat()"
   [color] = "cell.color"
   [cell]="cell"
@@ -6,4 +6,5 @@
   (onMovePiece)="movePiece($event)">
   </app-cell>
 </div>
+<app-game-over *ngIf="game.ended" [text]="game.winner == 'You'? 'You Win' : 'You lose'" (restartGame)="restartGame()"></app-game-over>
 

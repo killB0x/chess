@@ -77,6 +77,9 @@ export class CellComponent implements OnInit {
     if (this.cell) {
       this.cell.piece = this.cell.piece
     }
+  }
+
+  ngOnChanges() {
 
   }
 

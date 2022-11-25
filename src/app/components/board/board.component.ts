@@ -3,6 +3,7 @@ import { Color } from 'src/app/types/types';
 import { Board } from 'src/model/board.model';
 import { Cell } from 'src/model/cell.model';
 import { Game } from 'src/model/game.model';
+import { checkCheck } from 'src/utils/utils';
 
 @Component({
   selector: 'app-board',
@@ -21,10 +22,9 @@ export class BoardComponent implements OnInit {
   }
 
   movePiece(cell:Cell) {
-    console.log("MOVEW?", cell)
     if (this.lastActiveCell) {
-      console.log("MOVE")
       this.game.movePiece(this.lastActiveCell.piece!, cell.x, cell.y)
+      console.log("CHECK?", checkCheck(this.game.board, "white"))
     }
   }
 

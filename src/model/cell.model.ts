@@ -15,4 +15,11 @@ export class Cell {
     this.x = x
     this.y = y
   }
+
+  public deepCopy() {
+    if (this.piece) {
+      return new Cell(this.color, this.x, this.y, this.piece.deepCopy())
+    }
+    return new Cell(this.color, this.x, this.y)
+  }
 }

@@ -1,5 +1,5 @@
 import { Color, Coordinate, pieceType } from "src/app/types/types";
-import { insideBoard, avoidsSameColorCollision } from "src/utils/utils";
+import { insideBoard, avoidsSameColorCollision, checkMovesAgainstCheck } from "src/utils/utils";
 import { Board } from "../board.model";
 import { Piece } from "./piece.model";
 
@@ -10,6 +10,10 @@ export class King extends Piece {
   }
 
   possibleMoves(board: Board): Coordinate[] {
+    return checkMovesAgainstCheck(board,this,this.attackRadius(board))
+  }
+
+  attackRadius(board: Board): Coordinate[] {
     let allMoves = [
       {x:this.x+1, y:this.y+1},
       {x:this.x-1, y:this.y+1},
@@ -21,10 +25,10 @@ export class King extends Piece {
       {x:this.x, y:this.y+1}
     ]
 
-    allMoves = allMoves.filter(val => insideBoard(val.x,val.y) && avoidsSameColorCollision(val.x,val.y,board,this))
-
-    console.log(allMoves.length)
-    return allMoves
+    return allMoves.filter(val => insideBoard(val.x,val.y) && avoidsSameColorCollision(val.x,val.y,board,this))
   }
 
+  deepCopy() {
+    return new King(this.color, this.x, this.y, this.type)
+  }
 }

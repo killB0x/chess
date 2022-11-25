@@ -1,5 +1,5 @@
 import { Color, Coordinate, pieceType } from "src/app/types/types";
-import { generateDirectionalMoves } from "src/utils/utils";
+import { checkMovesAgainstCheck, generateDirectionalMoves } from "src/utils/utils";
 import { Board } from "../board.model";
 import { Piece } from "./piece.model";
 
@@ -9,6 +9,12 @@ export class Queen extends Piece {
   }
 
   possibleMoves(board: Board): Coordinate[] {
+
+
+    return checkMovesAgainstCheck(board,this,this.attackRadius(board))
+  }
+
+  attackRadius(board: Board): Coordinate[] {
     let allMoves:Coordinate[] = []
     allMoves = allMoves.concat(generateDirectionalMoves(1,0,this, board))
     allMoves = allMoves.concat(generateDirectionalMoves(-1,0,this, board))
@@ -19,8 +25,10 @@ export class Queen extends Piece {
     allMoves = allMoves.concat(generateDirectionalMoves(-1,1,this, board))
     allMoves = allMoves.concat(generateDirectionalMoves(1,-1,this, board))
 
-    console.log(allMoves.length)
     return allMoves
   }
 
+  deepCopy() {
+    return new Queen(this.color, this.x, this.y, this.type)
+  }
 }

@@ -4,6 +4,8 @@ import { Piece } from "./pieces/piece.model";
 
 export class Game {
   board: Board
+  turn: Color = "white"
+  playerColor: Color = "white"
 
   constructor (playerColor: Color) {
     this.board = new Board()
@@ -15,6 +17,10 @@ export class Game {
     piece.x = x
     piece.y = y
     this.board.getCells()[y][x].piece = piece
+  }
+
+  startGame(playerColor: Color) {
+
   }
 
 

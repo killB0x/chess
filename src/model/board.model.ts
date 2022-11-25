@@ -39,7 +39,7 @@ export class Board {
     const board_layout = [
       ["rook"  ,"knight" ,"bishop" ,"queen" ,"king"  ,"bishop" ,"knight" ,"rook" ],
       ["pawn"  ,"pawn"   ,"pawn"   ,"pawn"  ,"pawn"  ,"pawn"   ,"pawn"   ,"pawn" ],
-      ["empty" ,"empty"  ,"empty"  ,"pawn" ,"empty" ,"empty"  ,"empty"  ,"empty"],
+      ["empty" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
       ["empty" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
       ["empty" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
       ["empty" ,"empty"  ,"empty"  ,"empty" ,"empty" ,"empty"  ,"empty"  ,"empty"],
@@ -90,11 +90,34 @@ export class Board {
     if (cell.piece) {
       const cellPositions = cell.piece.possibleMoves(this)
       cellPositions.forEach(e => {
-        console.log(this.board, e)
         this.board[e.y][e.x].potentialOption = true
       });
     }
 
+  }
+
+  deepCopy() {
+    const board = new Board()
+    for (const cell of this.board.flat()) {
+      board.board[cell.y][cell.x] = cell.deepCopy()
+    }
+    return board
+  }
+
+  getPiecesByColor(color: Color) {
+    const pieces:Piece[] = []
+    this.board.flat().forEach(cell => {
+      const piece = cell.piece
+      if (piece && piece.color == color) {
+        pieces.push(piece)
+      }
+    })
+    return pieces
+  }
+
+  getKing(color: Color) {
+    let [king] = this.board.flat().filter(cell => cell.piece instanceof King && cell.piece.color == color)
+    return king
   }
 
   getCells() {

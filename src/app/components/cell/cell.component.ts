@@ -15,11 +15,13 @@ export class CellComponent implements OnInit {
   @Output() onShowPotentialMoves = new EventEmitter<Cell>()
   @Output() onMovePiece = new EventEmitter<Cell>()
   focused = false
+  checked = true
 
   colors = new Map<Color, string>([
     ["white", "#f0d9b5"],
     ["black", "#b58863"],
     ["focused", "#646d40"],
+    ["checked", "#e81915"]
   ])
 
   constructor(private eventService: EventsService) {
@@ -42,12 +44,8 @@ export class CellComponent implements OnInit {
   onClick(element: any) {
     const movePiece = this.cell?.potentialOption
     this.eventService.fireClearEvent()
-    console.log("CLICK")
     if (movePiece) {
-      console.log("Before", this.cell)
       this.onMovePiece.emit(this.cell)
-      console.log("After", this.cell)
-      console.log("img",this.getImageUrl())
     } else if (this.cell?.piece) {
       this.focused = true
       this.onShowPotentialMoves.emit(this.cell)

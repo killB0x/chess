@@ -1,5 +1,6 @@
 <div class="container"
     [ngStyle]="{'background-color': focused || (this.cell?.piece && this.cell?.potentialOption ) ? this.colors.get('focused') :this.colors.get(this.color)}"
+
     (click) = "onClick($event)"
     (mouseenter)="onHoverEnter($event)"
     (mouseleave)="onHoverLeave($event)">

@@ -14,7 +14,7 @@ export abstract class Piece {
     this.type = type
   }
 
-
-
   abstract possibleMoves(board: Board): Coordinate[];
+  abstract attackRadius(board: Board): Coordinate[];
+  abstract deepCopy():Piece;
 }

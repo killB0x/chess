@@ -31,14 +31,6 @@ export class CellComponent implements OnInit {
         this.cell.potentialOption = false
       }
     })
-    this.eventService.removeCheckObservable.subscribe(() => {
-      this.checked = false
-    })
-    this.eventService.setCheckObservable.subscribe((king) => {
-      if (this.cell && this.cell.piece && this.cell.piece == king) {
-        this.checked = true
-      }
-    })
   }
 
   getImageUrl() {

@@ -61,7 +61,8 @@ export class Board {
             j,
             i,
             pieceColor,
-            board_layout[i][j] as pieceType)
+            board_layout[i][j] as pieceType,
+            playerColor)
         } else {
           pieceColor = playerColor
         }
@@ -69,20 +70,20 @@ export class Board {
     }
   }
 
-  getPieceByType(x: number, y:number, pieceColor: Color, type: pieceType,) {
+  getPieceByType(x: number, y:number, pieceColor: Color, type: pieceType, playerColor:Color) {
     switch(type) {
       case "pawn":
-        return new Pawn(pieceColor, x, y, type)
+        return new Pawn(pieceColor, x, y, type, pieceColor == playerColor)
       case "bishop":
-        return new Bishop(pieceColor, x, y, type)
+        return new Bishop(pieceColor, x, y, type, pieceColor == playerColor)
       case "rook":
-        return new Rook(pieceColor, x, y, type)
+        return new Rook(pieceColor, x, y, type, pieceColor == playerColor)
       case "king":
-        return new King(pieceColor, x, y, type)
+        return new King(pieceColor, x, y, type, pieceColor == playerColor)
       case "knight":
-        return new Knight(pieceColor, x, y, type)
+        return new Knight(pieceColor, x, y, type, pieceColor == playerColor)
       case "queen":
-        return new Queen(pieceColor, x, y, type)
+        return new Queen(pieceColor, x, y, type, pieceColor == playerColor)
     }
   }
 

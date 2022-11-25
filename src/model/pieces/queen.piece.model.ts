@@ -4,8 +4,8 @@ import { Board } from "../board.model";
 import { Piece } from "./piece.model";
 
 export class Queen extends Piece {
-  constructor (color:Color, x:number, y:number, type:pieceType) {
-    super(color, x, y, type)
+  constructor (color:Color, x:number, y:number, type:pieceType, isPlayer:boolean) {
+    super(color, x, y, type, isPlayer)
   }
 
   possibleMoves(board: Board): Coordinate[] {
@@ -29,6 +29,6 @@ export class Queen extends Piece {
   }
 
   deepCopy() {
-    return new Queen(this.color, this.x, this.y, this.type)
+    return new Queen(this.color, this.x, this.y, this.type, this.isPlayer)
   }
 }

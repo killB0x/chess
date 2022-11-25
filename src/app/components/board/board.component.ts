@@ -10,7 +10,7 @@ import { checkCheck } from 'src/utils/utils';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  game: Game = new Game("white")
+  game: Game = new Game("black")
   lastActiveCell: Cell | undefined
 
   constructor(private eventService: EventsService) { }

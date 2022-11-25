@@ -4,8 +4,8 @@ import { Board } from "../board.model";
 import { Piece } from "./piece.model";
 
 export class Pawn extends Piece {
-  constructor (color:Color, x:number, y:number, type:pieceType) {
-    super(color, x, y, type)
+  constructor (color:Color, x:number, y:number, type:pieceType, isPlayer:boolean) {
+    super(color, x, y, type, isPlayer)
   }
 
   possibleMoves(board: Board): Coordinate[] {
@@ -14,8 +14,10 @@ export class Pawn extends Piece {
 
   //the range each piece can reach
   attackRadius(board:Board):Coordinate[] {
-    let yOffset = -1
-    if (this.color == "black") {
+    let yOffset
+    if (this.isPlayer) {
+      yOffset = -1
+    } else {
       yOffset = 1
     }
     let allMoves:Coordinate[] = []
@@ -39,6 +41,6 @@ export class Pawn extends Piece {
   }
 
   deepCopy() {
-    return new Pawn(this.color, this.x, this.y, this.type)
+    return new Pawn(this.color, this.x, this.y, this.type, this.isPlayer)
   }
 }

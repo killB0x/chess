@@ -35,7 +35,7 @@ export class Pawn extends Piece {
     if ((yOffset < 0 && this.y < 6) || (yOffset > 0 && this.y > 1) || !allMoves) {
       return allMoves
     }
-    if (insideBoard(this.x, this.y + 2*yOffset) && board.getCells()[this.y + 2*yOffset][this.x].piece == undefined) {
+    if (!oppositeColorCollision(this.x, this.y +2*yOffset, board, this)) {
       allMoves.push({x:this.x, y: this.y + 2*yOffset})
     }
     return allMoves

@@ -4,6 +4,7 @@ import { Board } from "../board.model";
 import { Piece } from "./piece.model";
 
 export class King extends Piece {
+  checked:boolean = false
 
   constructor (color:Color, x:number, y:number, type:pieceType, isPlayer:boolean) {
     super(color, x, y, type, isPlayer)

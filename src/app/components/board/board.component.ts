@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventsService } from 'src/app/services/events.service';
 import { Cell } from 'src/model/cell.model';
 import { Game } from 'src/model/game.model';
+import { King } from 'src/model/pieces/king.piece.model';
 import { checkCheck } from 'src/utils/utils';
 
 @Component({
@@ -20,23 +21,23 @@ export class BoardComponent implements OnInit {
       this.lastActiveCell = cell
       cell.focused = true
       this.game.board.updateCellPotentialMove(cell)
-      this.checkCheckAfterEvent()
+      this.refreshCheckMarker()
     }
   }
 
   movePiece(cell:Cell) {
     if (this.lastActiveCell) {
         this.game.movePiece(this.lastActiveCell.piece!, cell.x, cell.y)
-        this.checkCheckAfterEvent()
+        this.refreshCheckMarker()
     }
 
   }
 
-  checkCheckAfterEvent() {
+  refreshCheckMarker() {
     if (checkCheck(this.game.board,"white")) {
-      this.eventService.fireSetCheck(this.game.board.getKing("white").piece!)
+      this.eventService.fireSetCheck(this.game.board.getKing("white").piece! as King)
     } else if (checkCheck(this.game.board, "black")) {
-      this.eventService.fireSetCheck(this.game.board.getKing("black").piece!)
+      this.eventService.fireSetCheck(this.game.board.getKing("black").piece! as King)
     }
     else {
       this.eventService.fireRemoveCheck()
@@ -46,4 +47,7 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnChanges() {
+
+  }
 }

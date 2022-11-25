@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { EventsService } from 'src/app/services/events.service';
 import { Color } from 'src/app/types/types';
 import { Cell } from 'src/model/cell.model';
+import { King } from 'src/model/pieces/king.piece.model';
 import { Piece } from 'src/model/pieces/piece.model';
 
 @Component({
@@ -57,6 +58,14 @@ export class CellComponent implements OnInit {
       this.onShowPotentialMoves.emit(this.cell)
     }
 
+  }
+
+  getCheckedStatus() {
+    const piece = this.cell?.piece
+    if (piece instanceof King) {
+      return piece.checked
+    }
+    return false
   }
 
   onHoverEnter(e:any) {

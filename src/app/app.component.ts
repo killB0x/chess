@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'chess';
+  gameStarted = false
+
+  startGame() {
+    this.gameStarted = true
+  }
 }

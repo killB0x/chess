@@ -1,4 +1,4 @@
-import { Color } from "src/app/types/types";
+import { Color, Coordinate } from "src/app/types/types";
 import { Board } from "./board.model";
 import { Pawn } from "./pieces/pawn.piece.model";
 import { Piece } from "./pieces/piece.model";
@@ -6,16 +6,21 @@ import { Queen } from "./pieces/queen.piece.model";
 
 export class Game {
   board: Board
-  turn: Color = "white"
   playerColor: Color = "white"
+  computerColor: Color = "black"
 
   constructor (playerColor: Color) {
     this.board = new Board()
     this.board.initializeBoard(playerColor)
     this.playerColor = playerColor
+    if (this.playerColor == "white") {
+      this.computerColor = "black"
+    } else {
+      this.computerColor = "white"
+    }
   }
 
-  movePiece (piece: Piece, x:number, y:number,) {
+  movePiece (piece: Piece, x:number, y:number) {
     this.board.getCells()[piece.y][piece.x].piece = undefined
     piece.x = x
     piece.y = y
@@ -24,14 +29,17 @@ export class Game {
     } else {
       this.board.getCells()[y][x].piece = piece
     }
+    if (piece.color != this.computerColor) {
+      this.computerMove()
+    }
   }
 
-  endTurn() {
-    if (this.turn == "white") {
-      this.turn = "black"
-    } else {
-      this.turn = "white"
-    }
+  computerMove() {
+    const moves = this.board.getPotentialMovesByColor(this.computerColor)
+    const piece = moves[ Math.floor(Math.random() * moves.length)]
+    const move = piece.moves[Math.floor(Math.random() * piece.moves.length)]
+    console.log("Computer move")
+    this.movePiece(piece.piece, move.x, move.y)
   }
 
 

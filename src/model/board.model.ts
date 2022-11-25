@@ -1,4 +1,4 @@
-import { Color, pieceType, xCoordinate, yCoordinate } from "src/app/types/types";
+import { Color, Coordinate, pieceType, xCoordinate, yCoordinate } from "src/app/types/types";
 import { Cell } from "./cell.model";
 import { Bishop } from "./pieces/bishop.piece.model";
 import { King } from "./pieces/king.piece.model";
@@ -94,7 +94,18 @@ export class Board {
         this.board[e.y][e.x].potentialOption = true
       });
     }
+  }
 
+  getPotentialMovesByColor(color:Color) {
+    let pieces = this.getPiecesByColor(color)
+    let moves: any[] = []
+    pieces.forEach(piece => {
+      let possibleMoves = piece.possibleMoves(this)
+      if (possibleMoves.length != 0 ) {
+        moves = moves.concat({piece:piece, moves:possibleMoves})
+      }
+    })
+    return moves
   }
 
   deepCopy() {

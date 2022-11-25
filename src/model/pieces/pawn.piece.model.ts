@@ -35,8 +35,9 @@ export class Pawn extends Piece {
     if ((yOffset < 0 && this.y < 6) || (yOffset > 0 && this.y > 1) || !allMoves) {
       return allMoves
     }
-    allMoves.push({x:this.x, y: this.y + 2*yOffset})
-    allMoves = allMoves.filter(val => insideBoard(val.x,val.y) && avoidsSameColorCollision(val.x,val.y,board,this))
+    if (insideBoard(this.x, this.y + 2*yOffset) && board.getCells()[this.y + 2*yOffset][this.x].piece == undefined) {
+      allMoves.push({x:this.x, y: this.y + 2*yOffset})
+    }
     return allMoves
   }
 

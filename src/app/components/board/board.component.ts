@@ -16,16 +16,20 @@ export class BoardComponent implements OnInit {
   constructor(private eventService: EventsService) { }
 
   showPotentialMoves(cell:Cell) {
-    this.lastActiveCell = cell
-    this.game.board.updateCellPotentialMove(cell)
-    this.checkCheckAfterEvent()
+    if (cell.piece!.color == this.game.playerColor) {
+      this.lastActiveCell = cell
+      cell.focused = true
+      this.game.board.updateCellPotentialMove(cell)
+      this.checkCheckAfterEvent()
+    }
   }
 
   movePiece(cell:Cell) {
     if (this.lastActiveCell) {
-      this.game.movePiece(this.lastActiveCell.piece!, cell.x, cell.y)
-      this.checkCheckAfterEvent()
+        this.game.movePiece(this.lastActiveCell.piece!, cell.x, cell.y)
+        this.checkCheckAfterEvent()
     }
+
   }
 
   checkCheckAfterEvent() {

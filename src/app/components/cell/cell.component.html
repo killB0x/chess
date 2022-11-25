@@ -1,11 +1,11 @@
 <div class="container"
-    [ngStyle]="{'background-color': focused || (this.cell?.piece && this.cell?.potentialOption ) ? this.colors.get('focused') :this.colors.get(this.color),
+    [ngStyle]="{'background-color': (this.cell && this.cell.focused ) || (this.cell?.piece && this.cell?.potentialOption ) ? this.colors.get('focused') :this.colors.get(this.color),
                 'border': checked ? '5px solid red' : 'none'}"
     (click) = "onClick($event)"
     (mouseenter)="onHoverEnter($event)"
     (mouseleave)="onHoverLeave($event)">
   <div class="cell"
-  [ngStyle]="{'background-color': focused ? this.colors.get('focused') :this.colors.get(this.color)}"
+  [ngStyle]="{'background-color': (this.cell && this.cell?.focused ) ? this.colors.get('focused') :this.colors.get(this.color)}"
   >
     <img class="piece" *ngIf = "this.cell!.piece" src= {{this.getImageUrl()}}>
     <span *ngIf = "this.cell!.potentialOption && !this.cell!.piece" class="dot"></span>

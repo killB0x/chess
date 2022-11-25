@@ -14,7 +14,6 @@ export class CellComponent implements OnInit {
   @Input() cell:Cell | undefined
   @Output() onShowPotentialMoves = new EventEmitter<Cell>()
   @Output() onMovePiece = new EventEmitter<Cell>()
-  focused = false
   checked = false
 
   colors = new Map<Color, string>([
@@ -25,9 +24,9 @@ export class CellComponent implements OnInit {
 
   constructor(private eventService: EventsService) {
     this.eventService.clearEventObservable.subscribe(() => {
-      this.focused = false
       this.checked = false
       if (this.cell) {
+        this.cell.focused = false
         this.cell.potentialOption = false
       }
     })
@@ -54,7 +53,7 @@ export class CellComponent implements OnInit {
     if (movePiece) {
       this.onMovePiece.emit(this.cell)
     } else if (this.cell?.piece) {
-      this.focused = true
+
       this.onShowPotentialMoves.emit(this.cell)
     }
 
@@ -62,13 +61,14 @@ export class CellComponent implements OnInit {
 
   onHoverEnter(e:any) {
     if (this.cell?.potentialOption) {
-      this.focused = true
+      console.log("A")
+      this.cell.focused = true
     }
   }
 
   onHoverLeave(e:any) {
     if (this.cell?.potentialOption) {
-      this.focused = false
+      this.cell.focused = false
     }
   }
 

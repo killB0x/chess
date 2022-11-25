@@ -10,6 +10,7 @@ export class Game {
   board: Board
   playerColor: Color = "white"
   computerColor: Color = "black"
+  turn: Color = "white"
 
   constructor (playerColor: Color) {
     this.board = new Board()
@@ -40,6 +41,7 @@ export class Game {
       (this.board.getKing("black").piece! as King).checked = false;
       (this.board.getKing("white").piece! as King).checked = false;
     }
+    this.endTurn()
     if (piece.color != this.computerColor) {
       this.computerMove()
     }
@@ -55,5 +57,12 @@ export class Game {
     }, 1000)
   }
 
+  endTurn() {
+    if (this.turn == "white") {
+      this.turn = "black"
+    } else {
+      this.turn = "white"
+    }
+  }
 
 }

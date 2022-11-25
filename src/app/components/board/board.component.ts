@@ -11,38 +11,27 @@ import { checkCheck } from 'src/utils/utils';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  game: Game = new Game("black")
+  game: Game = new Game("white")
   lastActiveCell: Cell | undefined
 
   constructor(private eventService: EventsService) { }
 
   showPotentialMoves(cell:Cell) {
-    if (cell.piece!.color == this.game.playerColor) {
+    if (cell.piece!.color == this.game.playerColor &&
+      this.game.turn == this.game.playerColor) {
       this.lastActiveCell = cell
       cell.focused = true
       this.game.board.updateCellPotentialMove(cell)
-      this.refreshCheckMarker()
     }
   }
 
   movePiece(cell:Cell) {
     if (this.lastActiveCell) {
         this.game.movePiece(this.lastActiveCell.piece!, cell.x, cell.y)
-        this.refreshCheckMarker()
     }
 
   }
 
-  refreshCheckMarker() {
-    if (checkCheck(this.game.board,"white")) {
-      this.eventService.fireSetCheck(this.game.board.getKing("white").piece! as King)
-    } else if (checkCheck(this.game.board, "black")) {
-      this.eventService.fireSetCheck(this.game.board.getKing("black").piece! as King)
-    }
-    else {
-      this.eventService.fireRemoveCheck()
-    }
-  }
 
   ngOnInit(): void {
   }

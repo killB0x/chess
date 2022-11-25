@@ -1,6 +1,8 @@
 import { Color } from "src/app/types/types";
 import { Board } from "./board.model";
+import { Pawn } from "./pieces/pawn.piece.model";
 import { Piece } from "./pieces/piece.model";
+import { Queen } from "./pieces/queen.piece.model";
 
 export class Game {
   board: Board
@@ -16,7 +18,11 @@ export class Game {
     this.board.getCells()[piece.y][piece.x].piece = undefined
     piece.x = x
     piece.y = y
-    this.board.getCells()[y][x].piece = piece
+    if (piece instanceof Pawn && (y == 0 || y == 7)) {
+      this.board.getCells()[y][x].piece = new Queen(piece.color,x,y,"queen")
+    } else {
+      this.board.getCells()[y][x].piece = piece
+    }
   }
 
   startGame(playerColor: Color) {

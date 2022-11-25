@@ -72,6 +72,3 @@ export function checkCheck(board: Board, color: Color) {
   return false
 }
 
-export function checkMate(board: Board) {
-
-}
